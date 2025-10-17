@@ -1,3 +1,8 @@
+
+@view-transition {
+  navigation: auto;
+}
+
 :root {
     --color-purple: oklch(0.44 0.23 311.11);
     --color-pink: oklch(0.66 0.26 16.42);
@@ -16,13 +21,20 @@
 html {
     font-size: 125%;
     font-family: "Nunito", sans-serif;
-    /* smooth font rendering */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 body {
     margin: 0;
+    /* Center all content using CSS Grid */
+    display: grid;
+    place-items: center;
+    /* Also center the grid content distribution */
+    place-content: center;
+    /* Ensure the body fills the viewport height for vertical centering */
+    min-height: 100vh; /* fallback */
+    min-height: 100svh;
 }
 
 svg,
@@ -35,6 +47,14 @@ img {
 h1 {
     font-size: 6rem;
     margin: 0;
+    line-height: 1;
+    color: white;
+    text-decoration: none;
+}
+
+p{
+    color: white;
+    text-decoration: none;
 }
 
 /* objects */
@@ -46,27 +66,145 @@ h1 {
 
 /* components */
 
-.nav__list {}
+.nav__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2rem;
+    place-items: center;
+}
 
-.nav__item {}
+.nav__item { 
+    width: 20vw;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 10px;
+}
 
-.nav__link {}
+.nav__item--one {  
+    grid-area: 1 / 1 / 2 / 2;
+    background-color: #e74c3c;
+}
+
+.nav__item--two { 
+    grid-area: 1 / 2 / 2 / 3;
+    background-color: #8e44ad;
+}
+
+.nav__item--three { 
+    grid-area: 2 / 1 / 3 / 2;
+    background-color: #f1c40f;
+}
+
+.nav__item--four { 
+    grid-area: 2 / 2 / 3 / 3;
+    background-color: #27ae60;
+}
+
+.nav__link {
+    color: white;
+    text-decoration: none;
+}
 
 /* give the links a different background color */
 
-.page {}
+.page {
+    width: 80vw;
+    height: 80vh;
+    background: #fff;
+    border-radius: 2rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    display: grid;
+    grid-template-areas: "overlap";
+    justify-items: center;
+    align-items: center;
+    padding: 2rem;
+    place-items: center;
+}
+/* Center title, paragraph, and back link in .page */
+.page__title {
+    grid-row: 1;
+    align-self: center;
+    justify-self: center;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.page__paragraph {
+    grid-row: 2;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+    max-width: 40vw;
+}
+
+.page__back {
+    grid-row: 3;
+    align-self: end;
+    justify-self: center;
+    margin-top: 2rem;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
 
 /* give the pages a different background color */
 
-.page--one {}
+.page--one {
+    background-color: #e74c3c;
+}
 
-.page--two {}
+.page--two {
+    background-color: #8e44ad;
+}
 
-.page--three {}
+.page--three {
+    background-color: #f1c40f;
+}
 
-.page--four {}
+.page--four {
+    background-color: #27ae60;
+}
 
 .page__back {}
 
 .page__body,
-.page__back {}
+.page__back {
+    grid-area: overlap;
+    justify-self: end;
+    align-self: start;
+    margin: 0;
+    text-decoration: none;
+    cursor: pointer;
+}
+.page__body {
+    grid-area: overlap;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+/* Visually hidden for screen readers */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+::view-transition-group(root){
+    transition: opacity 0.5s ease-in-out;
+}
